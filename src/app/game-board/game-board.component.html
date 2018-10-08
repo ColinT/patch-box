@@ -1,0 +1,24 @@
+<div [style.border]="'1px black solid'">
+  <div 
+    [style.width]="board.columns * PATCH_WIDTH + 'px'"
+    [style.height]="board.rows * PATCH_HEIGHT + 'px'"
+  >
+    <ng-container *ngFor="let patch of board.patches; let i = index" [ngSwitch]="patch.type">
+      <pbx-patch
+        [width]="PATCH_WIDTH"
+        [height]="PATCH_HEIGHT"
+        [attr.draggable]="draggableTypes.includes(patch.type)"
+        (dragover)="onPatchDragOver($event, i)"
+        (dragstart)="onPatchDrag($event, i)"
+        (drop)="onPatchDrop($event, i);"
+        (click)="updateConnections(board)"
+        (contextmenu)="updateConnections(board)"
+        [patch]="patch"
+        [upPatch]="getUpPatchOf(i)"
+        [downPatch]="getDownPatchOf(i)"
+        [leftPatch]="getLeftPatchOf(i)"
+        [rightPatch]="getRightPatchOf(i)"
+      ></pbx-patch>
+    </ng-container>
+  </div>
+</div>
