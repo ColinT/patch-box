@@ -113,23 +113,28 @@ export class GameBoardComponent implements AfterViewInit {
     this.spreadConnections(spool);
   }
 
-  spreadConnections(patch: Patch, fromSide?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'): void {
+  spreadConnections(patch: Patch, checkedList?: Patch[]): void {
+    if (!checkedList) {
+      checkedList = [];
+    }
+    checkedList.push(patch);
+
     patch.isConnected = true;
     // Spread upwards
-    if (!(fromSide === 'UP') && !!patch.upPatch && !!patch.tiedEnds.UP) {
-      this.spreadConnections(patch.upPatch, 'DOWN');
+    if (!!patch.upPatch && !checkedList.includes(patch.upPatch) && !!patch.tiedEnds.UP) {
+      this.spreadConnections(patch.upPatch, checkedList);
     }
     // Spread downwards
-    if (!(fromSide === 'DOWN') && !!patch.downPatch && !!patch.tiedEnds.DOWN) {
-      this.spreadConnections(patch.downPatch, 'UP');
+    if (!!patch.downPatch && !checkedList.includes(patch.downPatch) && !!patch.tiedEnds.DOWN) {
+      this.spreadConnections(patch.downPatch, checkedList);
     }
     // Spread leftwards
-    if (!(fromSide === 'LEFT') && !!patch.leftPatch && !!patch.tiedEnds.LEFT) {
-      this.spreadConnections(patch.leftPatch, 'RIGHT');
+    if (!!patch.leftPatch && !checkedList.includes(patch.leftPatch) && !!patch.tiedEnds.LEFT) {
+      this.spreadConnections(patch.leftPatch, checkedList);
     }
     // Spread rightwards
-    if (!(fromSide === 'RIGHT') && !!patch.rightPatch && !!patch.tiedEnds.RIGHT) {
-      this.spreadConnections(patch.rightPatch, 'LEFT');
+    if (!!patch.rightPatch && !checkedList.includes(patch.rightPatch) && !!patch.tiedEnds.RIGHT) {
+      this.spreadConnections(patch.rightPatch, checkedList);
     }
   }
 
@@ -139,38 +144,47 @@ export class GameBoardComponent implements AfterViewInit {
     // Check if all connected ends are tied (not loose) and all tieoffs are included
     if (this.checkLooseConnections(this.board.spool) && this.checkTieoffConnections(this.board)) {
       this._board = new GameBoard();
+      setTimeout(() => {
+        this.updateConnections(this.board);
+      });
     }
   }
 
   /**
    * Recursive check for whether or not all connected (spooled) patches are tied up (not loose)
    * @param patch Patch to start at (should be the spool)
-   * @param fromSide Side to advance recursion (prevents infinite backtracking)
+   * @param checkedList List of alrady traced patches to prevent infinite loop
    */
-  checkLooseConnections(patch: Patch, fromSide?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'): boolean {
+  checkLooseConnections(patch: Patch, checkedList?: Patch[]): boolean {
+    if (!checkedList) {
+      checkedList = [];
+    }
+
+    checkedList.push(patch);
+
     if (!patch.isConnected) {
       return false;
     } else if (patch.isLoose) {
       return false;
     } else {
       // Check upwards
-      if (!(fromSide === 'UP') && !!patch.upPatch && !!patch.tiedEnds.UP
-        && !this.checkLooseConnections(patch.upPatch, 'DOWN')) {
+      if (!!patch.upPatch && !checkedList.includes(patch.upPatch) && !!patch.tiedEnds.UP
+        && !this.checkLooseConnections(patch.upPatch, checkedList)) {
         return false;
       }
       // Check downwards
-      if (!(fromSide === 'DOWN') && !!patch.downPatch && !!patch.tiedEnds.DOWN
-        && !this.checkLooseConnections(patch.downPatch, 'UP')) {
+      if (!!patch.downPatch && !checkedList.includes(patch.downPatch) && !!patch.tiedEnds.DOWN
+        && !this.checkLooseConnections(patch.downPatch, checkedList)) {
         return false;
       }
       // Check downwards
-      if (!(fromSide === 'LEFT') && !!patch.leftPatch && !!patch.tiedEnds.LEFT
-        && !this.checkLooseConnections(patch.leftPatch, 'RIGHT')) {
+      if (!!patch.leftPatch && !checkedList.includes(patch.leftPatch) && !!patch.tiedEnds.LEFT
+        && !this.checkLooseConnections(patch.leftPatch, checkedList)) {
         return false;
       }
       // Check rightwards
-      if (!(fromSide === 'RIGHT') && !!patch.rightPatch && !!patch.tiedEnds.RIGHT
-        && !this.checkLooseConnections(patch.rightPatch, 'LEFT')) {
+      if (!!patch.rightPatch && !checkedList.includes(patch.rightPatch) && !!patch.tiedEnds.RIGHT
+        && !this.checkLooseConnections(patch.rightPatch, checkedList)) {
         return false;
       }
       // All sides connected and tied

@@ -32,4 +32,11 @@ export class PatchComponent implements OnInit { // Base class for patches, shoul
     this.patch.submit = this.submit;
   }
 
+  get border() {
+    if (this.patch.isConnected && this.patch.isLoose) {
+      return '1px red solid';
+    }
+    return '1px black solid';
+  }
+
 }
