@@ -3,6 +3,7 @@ import { Patch } from './patches/patch.class';
 import { SpoolPatch } from './patches/spool/spool.class';
 import { LineTearPatch } from './patches/line-tear/line-tear.class';
 import { CornerTearPatch } from './patches/corner-tear/corner-tear.class';
+import { TieoffPatch } from './patches/tieoff/tieoff.class';
 
 export class GameBoard {
 
@@ -28,11 +29,17 @@ export class GameBoard {
   }
 
   generatePatches(spool: SpoolPatch): Patch[] { // TODO setup restrictions so that the board is always valid
-    const board: Patch[] = [spool];
+    const board: Patch[] = [];
     const fillableTypes = [LineTearPatch, CornerTearPatch];
-    while (board.length < this.rows * this.columns) {
-      const random = Math.floor(Math.random() * fillableTypes.length);
-      board.push(new (fillableTypes[random] as any));
+    for (let index = 0; index < this.rows * this.columns; index++) {
+      if (index === 0) {
+        board.push(spool);
+      } else if (index === this.columns) {
+        board.push(new TieoffPatch('RIGHT'));
+      } else {
+        const random = Math.floor(Math.random() * fillableTypes.length);
+        board.push(new (fillableTypes[random] as any));
+      }
     }
     return board;
   }

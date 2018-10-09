@@ -39,7 +39,9 @@ export class GameBoardComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit() {
-    this.updateConnections(this.board);
+    setTimeout(() => {
+      this.updateConnections(this.board);
+    });
   }
 
   getUpPatchOf(index: number): Patch | void {
@@ -129,6 +131,64 @@ export class GameBoardComponent implements AfterViewInit {
     if (!(fromSide === 'RIGHT') && !!patch.rightPatch && !!patch.tiedEnds.RIGHT) {
       this.spreadConnections(patch.rightPatch, 'LEFT');
     }
+  }
+
+  checkSubmission() {
+    // TODO implement unravelling if no loose ends but not all tieoffs are included
+
+    // Check if all connected ends are tied (not loose) and all tieoffs are included
+    if (this.checkLooseConnections(this.board.spool) && this.checkTieoffConnections(this.board)) {
+      this._board = new GameBoard();
+    }
+  }
+
+  /**
+   * Recursive check for whether or not all connected (spooled) patches are tied up (not loose)
+   * @param patch Patch to start at (should be the spool)
+   * @param fromSide Side to advance recursion (prevents infinite backtracking)
+   */
+  checkLooseConnections(patch: Patch, fromSide?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT'): boolean {
+    if (!patch.isConnected) {
+      return false;
+    } else if (patch.isLoose) {
+      return false;
+    } else {
+      // Check upwards
+      if (!(fromSide === 'UP') && !!patch.upPatch && !!patch.tiedEnds.UP
+        && !this.checkLooseConnections(patch.upPatch, 'DOWN')) {
+        return false;
+      }
+      // Check downwards
+      if (!(fromSide === 'DOWN') && !!patch.downPatch && !!patch.tiedEnds.DOWN
+        && !this.checkLooseConnections(patch.downPatch, 'UP')) {
+        return false;
+      }
+      // Check downwards
+      if (!(fromSide === 'LEFT') && !!patch.leftPatch && !!patch.tiedEnds.LEFT
+        && !this.checkLooseConnections(patch.leftPatch, 'RIGHT')) {
+        return false;
+      }
+      // Check rightwards
+      if (!(fromSide === 'RIGHT') && !!patch.rightPatch && !!patch.tiedEnds.RIGHT
+        && !this.checkLooseConnections(patch.rightPatch, 'LEFT')) {
+        return false;
+      }
+      // All sides connected and tied
+      return true;
+    }
+  }
+
+  /**
+   * Checks if all the tieoffs on the board are connected
+   * @param board The board to check
+   */
+  checkTieoffConnections(board: GameBoard): boolean {
+    for (const tieoff of board.patches.filter(patch => patch.type === PatchType.Tieoff)) {
+      if (!tieoff.isConnected) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }

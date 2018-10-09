@@ -1,13 +1,13 @@
 import { Patch, PatchType } from '../patch.class';
 
-export class SpoolPatch extends Patch {
+export class TieoffPatch extends Patch {
   constructor(orientation?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT') {
     super();
     // Initialize with a read only orientation
-    // TODO make sure spool has a valid spawn orientation
+    // TODO make sure tieoff has a valid spawn orientation
     const possibleOrientations = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
     // this._orientation = possibleOrientations[Math.floor(Math.random() * possibleOrientations.length)];
-    // For demonstration purposes, always make the spool face right
+    // For demonstration purposes, always make the tieoff face right
     this._orientation = orientation || possibleOrientations[3];
   }
 
@@ -35,11 +35,11 @@ export class SpoolPatch extends Patch {
   }
 
   get type() {
-    return PatchType.Spool;
+    return PatchType.Tieoff;
   }
 
   get imageUrl() {
-    return 'https://yppedia.puzzlepirates.com/images/0/08/Official-Patchingspool.png';
+    return `assets/patches/tieoff/${this.isConnected ? 'connected' : 'disconnected'}.svg`;
   }
 
   get rotation() {
@@ -52,28 +52,15 @@ export class SpoolPatch extends Patch {
   }
 
   rotateCw() {
-    // The spool cannot be rotated
+    // The tieoff cannot be rotated
   }
 
   rotateCcw() {
-    // The spool cannot be rotated, instead it has different behaviour for left clicks
-    this.submit.emit();
-    /**
-     * if no loose ends {
-     *   if tieoffs connected {
-     *     complete
-     *   } else {
-     *     convert grommets to line-tears (unravel)
-     *     reset gust meter
-     *   }
-     * } else {
-     *   throw incomplete error
-     * }
-     */
+    // The tieoff cannot be rotated
   }
 
-  clone(): SpoolPatch {
-    return new SpoolPatch(this.orientation);
+  clone(): TieoffPatch {
+    return new TieoffPatch(this.orientation);
   }
 
 }

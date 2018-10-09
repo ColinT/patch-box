@@ -10,11 +10,11 @@
    width="56"
    height="56"
    version="1.1"
-   id="svg6520"
-   sodipodi:docname="connected.svg"
+   id="svg4719"
+   sodipodi:docname="disconnected.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
-     id="metadata6526">
+     id="metadata4725">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,7 +26,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs6524" />
+     id="defs4723" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -36,47 +36,58 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1464"
-     inkscape:window-height="977"
-     id="namedview6522"
+     inkscape:window-width="1192"
+     inkscape:window-height="922"
+     id="namedview4721"
      showgrid="false"
-     inkscape:zoom="10.266"
-     inkscape:cx="32.864407"
-     inkscape:cy="23.353984"
-     inkscape:window-x="745"
-     inkscape:window-y="303"
+     inkscape:zoom="4.2142857"
+     inkscape:cx="-38.677966"
+     inkscape:cy="56.474576"
+     inkscape:window-x="1109"
+     inkscape:window-y="383"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg6520" />
+     inkscape:current-layer="svg4719" />
   <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
   <g
-     id="g6512"
-     transform="matrix(0.96551724,0,0,0.96551724,0.96551724,0.96551724)">
+     id="g4712"
+     transform="matrix(0.96551724,0,0,0.96551724,0.96551724,0.96551732)">
     <title
-       id="title6507">background</title>
+       id="title4706">background</title>
     <rect
-       x="-1"
-       y="-1"
-       width="58"
-       height="58"
        id="canvas_background"
-       style="fill:#fbc234" />
+       height="58"
+       width="58"
+       y="-1"
+       x="-1"
+       style="fill:#ded0a3" />
     <g
-       id="canvasGrid"
        display="none"
-       style="display:none">
+       overflow="visible"
+       y="0"
+       x="0"
+       height="100%"
+       width="100%"
+       id="canvasGrid"
+       style="display:none;overflow:visible">
       <rect
-         id="svg_1"
-         width="100%"
-         height="100%"
-         x="0"
          y="0"
+         x="0"
+         height="100%"
+         width="100%"
+         id="rect4709"
          style="fill:url(#gridpattern);stroke-width:0" />
     </g>
   </g>
   <path
-     style="opacity:1;fill:#fbc234;fill-opacity:1;stroke:#000000;stroke-width:1.00967193;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 36.495,19.504836 H 55.495164 V 36.495164 H 19.505 V 0.50483598 h 16.99 z"
-     id="rect5314-6"
+     style="fill:#35476d;fill-opacity:1;stroke:#3f3e37;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 25.5,0.25 v 55.5 h 5 V 0.25 Z"
+     id="path6446"
      inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccccccc" />
+     sodipodi:nodetypes="ccccc" />
+  <path
+     style="fill:#35476d;fill-opacity:1;stroke:#3f3e37;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 55.75,25.5 -55.5,0 v 5 l 55.5,0 z"
+     id="path6446-2"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccccc" />
 </svg>

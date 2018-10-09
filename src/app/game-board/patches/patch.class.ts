@@ -1,3 +1,5 @@
+import { EventEmitter } from '@angular/core';
+
 export abstract class Patch {
 
   public upPatch: Patch | void;
@@ -29,6 +31,8 @@ export abstract class Patch {
       'RIGHT': !!this.rightPatch && this.ends.RIGHT && this.rightPatch.ends.LEFT,
     };
   }
+
+  public submit = new EventEmitter<void>();
 
   public abstract rotateCw(): void; // Rotate clockwise
   public abstract rotateCcw(): void; // Rotate counterclockwise
