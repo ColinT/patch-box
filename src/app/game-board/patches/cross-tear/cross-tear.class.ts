@@ -31,9 +31,7 @@ export class CrossTearPatch extends Patch {
     return `assets/patches/cross-tear/${this.isConnected ? 'connected' : 'disconnected'}.svg`;
   }
 
-  get rotation(): 0 {
-    return 0;
-  }
+  readonly rotation = 0;
 
   rotateCw() {
     // Cross tears cannot be rotated

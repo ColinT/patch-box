@@ -7,6 +7,7 @@ import { LineTearPatch } from './patches/line-tear/line-tear.class';
 import { CornerTearPatch } from './patches/corner-tear/corner-tear.class';
 import { TeeTearPatch } from './patches/tee-tear/tee-tear.class';
 import { CrossTearPatch } from './patches/cross-tear/cross-tear.class';
+import { GrommetPatch } from './patches/grommet/grommet.class';
 
 export class GameBoard {
 
@@ -33,7 +34,13 @@ export class GameBoard {
 
   generatePatches(spool: SpoolPatch): Patch[] { // TODO setup restrictions so that the board is always valid
     const board: Patch[] = [];
-    const fillableTypes = [LineTearPatch, CornerTearPatch, TeeTearPatch, CrossTearPatch];
+    const fillableTypes = [ // Adjust spawn rate via frequency; TODO use a better system for more complex spawn chances
+      LineTearPatch, LineTearPatch,
+      CornerTearPatch, CornerTearPatch,
+      TeeTearPatch, TeeTearPatch,
+      CrossTearPatch,
+      GrommetPatch
+    ];
     for (let index = 0; index < this.rows * this.columns; index++) {
       if (index === 0) {
         board.push(spool);
