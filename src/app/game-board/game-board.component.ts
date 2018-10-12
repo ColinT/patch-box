@@ -92,6 +92,7 @@ export class GameBoardComponent implements AfterViewInit {
         this.draggableTypes.includes(dropPatch.type)
       ) {
         // Swap the patches
+        // It is faster to clone the patches for change detection updates
         this.board.patches[dragIndex] = dropPatch.clone();
         this.board.patches[dropIndex] = dragPatch.clone();
         setTimeout(() => { // Wait for bindings to update

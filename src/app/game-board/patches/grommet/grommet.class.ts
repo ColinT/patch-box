@@ -67,6 +67,6 @@ export class GrommetPatch extends Patch {
   }
 
   clone(): GrommetPatch {
-    return new GrommetPatch();
+    return new GrommetPatch(this.orientation);
   }
 }
