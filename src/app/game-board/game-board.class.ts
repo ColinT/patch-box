@@ -8,6 +8,7 @@ import { CornerTearPatch } from './patches/corner-tear/corner-tear.class';
 import { TeeTearPatch } from './patches/tee-tear/tee-tear.class';
 import { CrossTearPatch } from './patches/cross-tear/cross-tear.class';
 import { GrommetPatch } from './patches/grommet/grommet.class';
+import { BlockerPatch } from './patches/blocker/blocker.class';
 
 export class GameBoard {
 
@@ -39,7 +40,8 @@ export class GameBoard {
       CornerTearPatch, CornerTearPatch,
       TeeTearPatch, TeeTearPatch,
       CrossTearPatch,
-      GrommetPatch
+      GrommetPatch,
+      BlockerPatch, // Yolo swag
     ];
     for (let index = 0; index < this.rows * this.columns; index++) {
       if (index === 0) {
