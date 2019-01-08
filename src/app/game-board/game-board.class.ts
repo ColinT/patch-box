@@ -56,4 +56,13 @@ export class GameBoard {
     return board;
   }
 
+  // Pseudocode for true board generation
+
+  // generateEndpoints(board: GameBoard, howMany: number = 4);
+  // Creates the locations for the spool & tieoffs; howMany must be strictly positive
+  // Endpoint generation is simple. First spot just cannot point into a wall
+  // Every other spot must be able to connect to the first spot (A*) without blocking previous spots
+
+  // growPatches(board: GameBoard)
+  // 
 }
