@@ -22,7 +22,7 @@ export class GameBoardComponent implements AfterViewInit {
     this.board.columns = value;
   }
 
-  @ViewChild('canvas') canvas: HTMLCanvasElement;
+  @ViewChild('canvas', { static: false }) canvas: HTMLCanvasElement;
 
   // Dimensions of a patch img
   public readonly PATCH_WIDTH = 56;
