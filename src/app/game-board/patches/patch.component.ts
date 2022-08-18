@@ -15,7 +15,7 @@ export class PatchComponent implements OnInit { // Base class for patches, shoul
   @Input() set rightPatch(value: Patch | void) { this.patch.rightPatch = value; }
   @Input() width: number;
   @Input() height: number;
-  @Output() submit = new EventEmitter<void>();
+  @Output() submitSolution = new EventEmitter<void>();
 
   // handle left click
   @HostListener('click', ['$event']) onLeftClick(event: Event) {
@@ -29,7 +29,7 @@ export class PatchComponent implements OnInit { // Base class for patches, shoul
   }
 
   ngOnInit() {
-    this.patch.submit = this.submit;
+    this.patch.submitSolution = this.submitSolution;
   }
 
   get border() {

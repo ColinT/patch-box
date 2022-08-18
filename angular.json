@@ -91,26 +91,21 @@
               "src/assets"
             ]
           }
-        }
-      }
-    },
-    "patch-box-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "patch-box:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "patch-box:serve:production"
-            }
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
+  },
+  "defaultProject": "patch-box",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }
