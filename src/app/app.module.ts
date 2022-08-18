@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     GameBoardModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
