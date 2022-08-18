@@ -32,7 +32,7 @@ export abstract class Patch {
     };
   }
 
-  public submit = new EventEmitter<void>();
+  public submitSolution = new EventEmitter<void>();
 
   public abstract rotateCw(): void; // Rotate clockwise
   public abstract rotateCcw(): void; // Rotate counterclockwise

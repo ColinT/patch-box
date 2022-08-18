@@ -57,7 +57,7 @@ export class SpoolPatch extends Patch {
 
   rotateCcw() {
     // The spool cannot be rotated, instead it has different behaviour for left clicks
-    this.submit.emit();
+    this.submitSolution.emit();
     /**
      * if no loose ends {
      *   if tieoffs connected {
