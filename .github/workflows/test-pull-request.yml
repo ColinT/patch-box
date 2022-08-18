@@ -1,0 +1,8 @@
+name: Run unit tests on PR
+on: pull_request_target
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci --legacy-peer-deps && npm run test
