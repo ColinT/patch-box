@@ -1,0 +1,8 @@
+name: Run linter on PR
+on: pull_request
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci --legacy-peer-deps && npm run lint
